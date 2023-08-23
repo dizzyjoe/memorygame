@@ -1,0 +1,60 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  height: 100vh;
+  font-family: sans-serif;
+}
+
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  border: 4px dotted grey;
+  padding: 10px;
+}
+
+button {
+  display: block;
+  margin: 10px auto;
+  padding: 10px;
+  font-size: 16px;
+  color: grey;
+  border: 1px solid grey;
+  border-radius: 4px;
+  outline: none;
+}
+
+button:hover {
+  background-color: grey;
+  color: white;
+}
+
+
+.off-screen {
+  display: none;
+}
+
+
+
+.card {
+  width: 80px;
+  height: 120px;
+  border: 3px solid #000000;
+  perspective: 1000px;
+  transform-style: preserve-3d;
+  transition: transform 0.5s;
+}
+
+
+
+.grid-wrapper {
+  display: grid;
+  grid-template-columns: repeat(13, 1fr);
+  grid-template-rows: repeat(4, 1fr);
+  gap: 10px;
+  perspective: 800px;
+}
+
+
