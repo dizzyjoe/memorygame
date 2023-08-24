@@ -3,12 +3,9 @@ const suits = ['s', 'c', 'd', 'h'];
 const ranks = ['02', '03', '04', '05', '06', '07', '08', '09', '10', 'J', 'Q', 'K', 'A'];
 
 
-
 // Build an 'original' deck of 'card' objects used to create shuffled decks
 const originalDeck = buildOriginalDeck();
 renderDeckInContainer(originalDeck, document.getElementById('original-deck-container'));
-
-
 
 
 
@@ -21,7 +18,20 @@ let flippedCards = [];
 const shuffledContainer = document.getElementById('shuffled-deck-container');
 
 /*----- event listeners -----*/
-document.querySelector('button').addEventListener('click', renderNewShuffledDeck);
+document.querySelector('button').addEventListener('click', () => {
+  // Reset the player lives
+  playerLives = 12;
+  playerLivesCount.textContent = playerLives; // Update the displayed count
+
+  // Render a new shuffled deck
+  renderNewShuffledDeck();
+
+  // Clear the wrong guess message
+  messageElement.textContent = '';
+
+  // Check for game over
+  checkGameOver();
+});
 
 /*----- functions -----*/
 function getNewShuffledDeck() {
@@ -57,30 +67,81 @@ function renderDeckInContainer(deck, container) {
     cardElement.classList.add('card', card.face, 'back');// (change cards to back sides and figure out how to toggle flip the cards to the face side )
     gridWrapper.appendChild(cardElement);
 
-    cardElement.addEventListener('click', () => {
-      if (!cardElement.classList.contains('back') || flippedCards.length < 2) {
-      cardElement.classList.toggle('back');
-      if (flippedCards.length < 2) {
-        flippedCards.push(card);
-      }
-      if (flippedCards.length === 2) {
-        // Check if the values of the two flipped cards match
-        if (flippedCards[0].value === flippedCards[1].value) {
-          // Cards match, keep them face-up
-          flippedCards = [];
-        } else {
-          // Cards don't match, flip them face-down after a brief delay
-          setTimeout(() => {
-            flippedCards.forEach(flippedCard => {
-              const cardElement = gridWrapper.querySelector(`.${flippedCard.face}`);
-              cardElement.classList.add('back');
-            });
-            flippedCards = [];
-          }, 1000); // Adjust the delay as needed
-        }
+
+    function checkGameOver() {
+      if (playerLives === 0) {
+        // Display game over message
+        messageElement.textContent = 'YOU LOST! PLAY AGAIN?!';
+    
+        // Automatically restart the game
+        setTimeout(() => {
+          // Reset the player lives and the message
+          playerLives = 12;
+          playerLivesCount.textContent = playerLives;
+          messageElement.textContent = '';
+    
+          // Render a new shuffled deck
+          renderNewShuffledDeck();
+        }, 3000); // Adjust the delay as needed
       }
     }
-  });
+
+
+
+    cardElement.addEventListener('click', () => {
+      if (!cardElement.classList.contains('back') || flippedCards.length < 2) {
+        cardElement.classList.toggle('back');
+        if (flippedCards.length < 2) {
+          flippedCards.push(card);
+        }
+        if (flippedCards.length === 2) {
+          // Check if the values of the two flipped cards match
+          if (flippedCards[0].value === flippedCards[1].value) {
+            console.log(
+              'flipped card 1',
+              flippedCards[0].value,
+              'flipped card 2',
+              flippedCards[1].value
+              );
+            // Cards match, keep them face-up
+            flippedCards = [];
+          } else {
+            // Cards don't match, flip them face-down after a brief delay
+            console.log(
+              'flipped card 1',
+              flippedCards[0].value,
+              'flipped card 2',
+              flippedCards[1].value
+            );
+            setTimeout(() => {
+              flippedCards.forEach(flippedCard => {
+                const cardElement = gridWrapper.querySelector(`.${flippedCard.face}`);
+                cardElement.classList.add('back');
+              });
+    
+              // Adjust life deduction
+              if (flippedCards.length === 2) {
+                playerLives--;
+                playerLivesCount.textContent = playerLives;
+              }
+    
+              // Check for game over
+              checkGameOver();
+    
+              // Display wrong guess message
+              if (flippedCards.length === 2) {
+                messageElement.textContent = 'Wrong guess';
+                setTimeout(() => {
+                  messageElement.textContent = '';
+                }, 3000); // Adjust the delay as needed
+    
+                flippedCards = [];
+              }
+            }, 1000); // Adjust the delay as needed
+          }
+        }
+      }
+    });
     
 
     // Check if a new row should be started
@@ -98,11 +159,21 @@ function buildOriginalDeck() {
 
   suits.forEach(function (suit) {
     ranks.forEach(function (rank) {
-      const cardType = rank === 'K' || rank === 'Q' || rank === 'J' || rank === '10' ? cardTypeCounter++ : 0;
+      let cardValue = Number(rank); // Default value for numbered cards
+      if (rank === 'A') {
+        cardValue = 11; // Ace value
+      } else if (rank === 'J') {
+        cardValue = 12; // Jack value
+      } else if (rank === 'Q') {
+        cardValue = 13; // Queen value
+      } else if (rank === 'K') {
+        cardValue = 14; // King value
+      }
+
       deck.push({
         face: `${suit}${rank}`,
-        value: Number(rank) || (rank === 'A' ? 11 : 10),
-        cardType: cardType, // Assign the card type
+        value: cardValue,
+        cardType: cardTypeCounter, // Assign the card type
       });
     });
   });
@@ -111,19 +182,27 @@ function buildOriginalDeck() {
 }
 
 function areMatchingCards(card1, card2) {
-  return card1.value === card2.value;
-  console.log("Card 1 - Value:", card1.value, "Face:", card1.face, "Type:", card1.cardType);
+  // Check if the card values match and their types are not K, Q, or J
+  return card1.value === card2.value && ![12, 13, 14].includes(card1.value);
+console.log("Card 1 - Value:", card1.value, "Face:", card1.face, "Type:", card1.cardType);
 console.log("Card 2 - Value:", card2.value, "Face:", card2.face, "Type:", card2.cardType);
 }
+  
 
 renderNewShuffledDeck();
 
+
+
+
 const section = document.querySelector('section');
 const playerLivesCount = document.querySelector('span');
-let playerLives = 12;
+let playerLives = 14;
 
-//link text 
-platerLivesCount.textContent = playerLives;
+playerLivesCount.textContent = playerLives;
+
+const messageElement = document.createElement('div');
+messageElement.classList.add('message');
+section.appendChild(messageElement);
 
 
   //CSS Card Pack ^
