@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width">
-  <title>CSS Card Library</title>
+  <title>Concentration Card Game (Memory!)</title>
   <link href="css/card-library/css/cardstarter.css" rel="stylesheet" type="text/css" />
   <link href="css/main.css" rel="stylesheet" type="text/css" />
   <script defer src="js/main.js"></script>
@@ -15,40 +15,27 @@
         background-blend-mode: overlay
         };
 
+
+
   </style>
 
 </head>
 
 <body>
 
-  <canvas id="gameCanvas" width="200" height="200"></canvas>
+  
 
-  <script>
-    const canvas = document.getElementById("gameCanvas");
-    const ctx = canvas.getContext("2d");
-    
-    let lifeCounter = 6;
-    const textFont = "36px Arial";
-    const textColor = "#FFFFFF";
-    
-    function drawLifeCounter() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        
-        ctx.font = textFont;
-        ctx.fillStyle = textColor;
-        ctx.fillText(`Lives: ${lifeCounter}`, 6, 40);
-    }
-    
-    function gameLoop() {
-        drawLifeCounter();
-        requestAnimationFrame(gameLoop);
-    }
-    
-    gameLoop();
-</script>
+<h1>Lives:  <span class='playerLivesCount'></span></h1>
+
+
+  <section>
 
 
 
+
+  </section>
+
+  
 
 
 <div id="original-deck-container" class="off-screen"></div>
@@ -56,7 +43,7 @@
 
  <!--  <h3>Original Deck</h3>
  <section id="original-deck-container" class="card-container"></section> -->
-  <button>RE-SHUFFLE DECK</button>
+  <button>RE-SHUFFLE/RE-PLAY</button>
   <h3>Shuffled Deck</h3>
   <!-- <section id="shuffled-deck-container" class="card-container">
   </section> -->

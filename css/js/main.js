@@ -2,12 +2,20 @@
 const suits = ['s', 'c', 'd', 'h'];
 const ranks = ['02', '03', '04', '05', '06', '07', '08', '09', '10', 'J', 'Q', 'K', 'A'];
 
+
+
 // Build an 'original' deck of 'card' objects used to create shuffled decks
 const originalDeck = buildOriginalDeck();
 renderDeckInContainer(originalDeck, document.getElementById('original-deck-container'));
 
+
+
+
+
 /*----- app's state (variables) -----*/
 let shuffledDeck;
+
+let flippedCards = [];
 
 /*----- cached element references -----*/
 const shuffledContainer = document.getElementById('shuffled-deck-container');
@@ -50,8 +58,30 @@ function renderDeckInContainer(deck, container) {
     gridWrapper.appendChild(cardElement);
 
     cardElement.addEventListener('click', () => {
+      if (!cardElement.classList.contains('back') || flippedCards.length < 2) {
       cardElement.classList.toggle('back');
-    });
+      if (flippedCards.length < 2) {
+        flippedCards.push(card);
+      }
+      if (flippedCards.length === 2) {
+        // Check if the values of the two flipped cards match
+        if (flippedCards[0].value === flippedCards[1].value) {
+          // Cards match, keep them face-up
+          flippedCards = [];
+        } else {
+          // Cards don't match, flip them face-down after a brief delay
+          setTimeout(() => {
+            flippedCards.forEach(flippedCard => {
+              const cardElement = gridWrapper.querySelector(`.${flippedCard.face}`);
+              cardElement.classList.add('back');
+            });
+            flippedCards = [];
+          }, 1000); // Adjust the delay as needed
+        }
+      }
+    }
+  });
+    
 
     // Check if a new row should be started
     if ((i + 1) % 13 === 0) {
@@ -64,24 +94,36 @@ function renderDeckInContainer(deck, container) {
 
 function buildOriginalDeck() {
   const deck = [];
-  // Use nested forEach to generate card objects
-  suits.forEach(function(suit) {
-    ranks.forEach(function(rank) {
+  let cardTypeCounter = 0; // Assign unique IDs to card types
+
+  suits.forEach(function (suit) {
+    ranks.forEach(function (rank) {
+      const cardType = rank === 'K' || rank === 'Q' || rank === 'J' || rank === '10' ? cardTypeCounter++ : 0;
       deck.push({
-        // The 'face' property maps to the library's CSS classes for cards
         face: `${suit}${rank}`,
-        
-        // Setting the 'value' property for game of blackjack, not war
-        value: Number(rank) || (rank === 'A' ? 11 : 10)
+        value: Number(rank) || (rank === 'A' ? 11 : 10),
+        cardType: cardType, // Assign the card type
       });
     });
   });
+
   return deck;
+}
+
+function areMatchingCards(card1, card2) {
+  return card1.value === card2.value;
+  console.log("Card 1 - Value:", card1.value, "Face:", card1.face, "Type:", card1.cardType);
+console.log("Card 2 - Value:", card2.value, "Face:", card2.face, "Type:", card2.cardType);
 }
 
 renderNewShuffledDeck();
 
+const section = document.querySelector('section');
+const playerLivesCount = document.querySelector('span');
+let playerLives = 12;
 
+//link text 
+platerLivesCount.textContent = playerLives;
 
 
   //CSS Card Pack ^
