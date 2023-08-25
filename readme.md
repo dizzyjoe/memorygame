@@ -8,7 +8,6 @@ Concentration is a fun card game all about memory, thats why its also refered to
 ![image](https://github.com/dizzyjoe/memorygame/assets/141372845/8f1ebbcc-b7b0-4bbc-b828-e4f8f6b5179e)
 
 
-![image](https://github.com/dizzyjoe/memorygame/assets/141372845/fdda5997-8ad2-402f-9cb8-fa48bb0ea483)
 
 
 ![image](https://github.com/dizzyjoe/memorygame/assets/141372845/ac16dfc0-9830-4619-8d75-ba4748bfae1e)
