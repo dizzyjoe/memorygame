@@ -1,14 +1,17 @@
--🃏♦️♠️♣️♥️🎲 Concentration Card Game (Memory!)
+# 🃏♦️♠️♣️♥️🎲 Concentration Card Game (Memory!)
 
-# About this game:
-Concentration is a fun card game all about memory, thats why its also refered to as, memory. It can be played with any amount of players and increasing the deck size to increase the difficultly. The version we will be playing is a single player variation with a 52 standard card deck with a total life count. The goal of the game is to find all the matching pairs before your life total depletes to 0. Click any 2 pairs of cards, if the pairs that are revealed are matching, then those pairs will remain flipped up. If they are not matching then the cards will filp back facing down. if you reveal a unmatching pair you will lose one life, starting with a total of 6 life points. There will also be a replay / reshuffle button to start over.
+## About this game:
+Concentration is a fun card game all about memory, thats why its also refered to as, memory. It can be played with any amount of players and increasing the deck size to increase the difficultly. The version we will be playing is a single player variation with a 52 standard card deck with a total life count. The goal of the game is to find all the matching pairs before your life total depletes to 0. Click any 2 pairs of cards, if the pairs that are revealed are matching, then those pairs will remain flipped up. If they are not matching then the cards will filp back facing down with a message of 'Wrong Guess' on screen. if you reveal a unmatching pair you will lose one life, starting with a total of 45 life points. There will also be a reshuffle / replay button you can use at anytime if you would like to reset the cards to start a new game.
 
 ## Wireframe
-![image](https://github.com/dizzyjoe/memorygame/assets/141372845/0ac54942-309f-4ca6-8384-2fbe89393a8e)
+
+![image](https://github.com/dizzyjoe/memorygame/assets/141372845/8f1ebbcc-b7b0-4bbc-b828-e4f8f6b5179e)
 
 
 ![image](https://github.com/dizzyjoe/memorygame/assets/141372845/fdda5997-8ad2-402f-9cb8-fa48bb0ea483)
 
+
+![image](https://github.com/dizzyjoe/memorygame/assets/141372845/ac16dfc0-9830-4619-8d75-ba4748bfae1e)
 
 ## Tecnologies used:
 * Javascript
@@ -20,7 +23,8 @@ Concentration is a fun card game all about memory, thats why its also refered to
 ## Getting Started:
 
 
--link to deployed game and any more instructions 
+-link to deployed game 
+http://127.0.0.1:5500/css/
 
 
 ## Next Steps: things I want to add to the game(future ideas)
