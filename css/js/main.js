@@ -1,29 +1,29 @@
 const suits = ['s', 'c', 'd', 'h'];
-const ranks = ['02', '03', '04', '05', '06', '07', '08', '09', '10', 'J', 'Q', 'K', 'A'];
-const section = document.querySelector('section');
-const playerLivesCount = document.querySelector('span');
+  const ranks = ['02', '03', '04', '05', '06', '07', '08', '09', '10', 'J', 'Q', 'K', 'A'];
+  const section = document.querySelector('section');
+  const playerLivesCount = document.querySelector('span');
 
 
 const originalDeck = buildOriginalDeck();
-renderDeckInContainer(originalDeck, document.getElementById('original-deck-container'));
+  renderDeckInContainer(originalDeck, document.getElementById('original-deck-container'));
 
 
 const winMessage = document.getElementById('win-message');
-const loseMessage = document.getElementById('lose-message');
-const wrongGuessMessage = document.getElementById('wrong-guess-message');
+  const loseMessage = document.getElementById('lose-message');
+  const wrongGuessMessage = document.getElementById('wrong-guess-message');
 
 
 let shuffledDeck;
-let flippedCards = [];
-let isFlipping = false;
-let playerLives = 45;
-playerLivesCount.textContent = playerLives;
+  let flippedCards = [];
+  let isFlipping = false;
+  let playerLives = 45;
+  playerLivesCount.textContent = playerLives;
 
 
 const shuffledContainer = document.getElementById('shuffled-deck-container');
-const messageElement = document.createElement('div');
-messageElement.classList.add('message'); // Add this line
-section.appendChild(messageElement);
+  const messageElement = document.createElement('div');
+  messageElement.classList.add('message'); // Add this line
+  section.appendChild(messageElement);
 
 
 document.querySelector('button').addEventListener('click', function() {
@@ -62,7 +62,7 @@ function renderDeckInContainer(deck, container) {
 
  
   const gridWrapper = document.createElement('div');
-  gridWrapper.classList.add('grid-wrapper');
+    gridWrapper.classList.add('grid-wrapper');
 
 
 
@@ -215,4 +215,4 @@ function areMatchingCards(card1, card2) {
   );
   }
 
-renderNewShuffledDeck();
+  renderNewShuffledDeck();
