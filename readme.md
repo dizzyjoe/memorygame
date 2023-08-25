@@ -22,7 +22,8 @@ Concentration is a fun card game all about memory, thats why its also refered to
 ## Getting Started:
 
 
--link to deployed game 
+-link to deployed game:
+
 http://127.0.0.1:5500/css/
 
 
