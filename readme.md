@@ -24,7 +24,7 @@ Concentration is a fun card game all about memory, thats why its also refered to
 
 -link to deployed game:
 
-[http://127.0.0.1:5500/css/](https://dizzyjoe.github.io/memorygame/)
+https://dizzyjoe.github.io/memorygame/
 
 
 ## Next Steps: things I want to add to the game(future ideas)
